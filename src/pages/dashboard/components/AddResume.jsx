@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useUser } from '@clerk/clerk-react'
 import { apiCreateNewResume } from '@/api/resume';
+import { useNavigation } from 'react-router-dom';
 
 
 function AddResume() {
@@ -20,6 +21,7 @@ function AddResume() {
     const [resumeTitle, setResumeTitle] = useState(''); // 设置简历标题的状态
     const [loading, setLoading] = useState(false); // 设置加载状态
     const { user } = useUser(); // 使用useUser hook获取当前用户信息
+    const navigation = useNavigation();
 
     const onCreate = async () => {
         const uuid = uuidv4(); // 生成一个uuid
@@ -30,14 +32,15 @@ function AddResume() {
             userName: user?.fullName
         };
         setLoading(true);
-    
+
         try {
             const result = await apiCreateNewResume(resumeData);
             console.log('Created resume:', result);
             setOpenDialog(false); // 关闭对话框
+            navigation('/dashboard/resume/' + uuid + '/edit'); // 跳转到编辑页面
         } catch (error) {
             console.error('Failed to create resume:', error);
-        }finally {
+        } finally {
             setLoading(false);
         }
     };
@@ -47,7 +50,7 @@ function AddResume() {
             <div className='p-14 py-24 border items-center flex justify-center bg-secondary rounded-lg h-[280px] hover:scale-105 transition-all hover:shadow-sm cursor-pointer border-dashed'
                 onClick={() => setOpenDialog(true)}
             >
-                <PlusSquare />
+                <PlusSquare className='text-slate-400' />
             </div>
             <Dialog open={openDialog}>
                 <DialogTrigger></DialogTrigger>
@@ -55,15 +58,15 @@ function AddResume() {
                     <DialogHeader>
                         <DialogTitle>创建一份新简历</DialogTitle>
                         <DialogDescription>
-                            <p className='mt-2'>请输入简历名称</p>
+                            <span className='mt-2'>请输入简历名称</span>
                             <Input className="my-2" placeholder="例如：全栈工程师简历" onChange={(e) => { setResumeTitle(e.target.value) }} />
                         </DialogDescription>
                         <div className='flex justify-end gap-4'>
                             <Button onClick={() => setOpenDialog(false)} variant="ghost">取消</Button>
-                            <Button onClick={() => { onCreate() }} disabled={!resumeTitle||loading}>
-                                {loading ? 
-                                <Loader2Icon className="animate-spin" size={20} />
-                                : '确认'}
+                            <Button onClick={() => { onCreate() }} disabled={!resumeTitle || loading}>
+                                {loading ?
+                                    <Loader2Icon className="animate-spin" size={20} />
+                                    : '确认'}
                             </Button>
                         </div>
                     </DialogHeader>

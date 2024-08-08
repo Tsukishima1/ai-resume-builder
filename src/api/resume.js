@@ -14,3 +14,17 @@ export const apiCreateNewResume = async (resumeData) => {
     }
 };
 
+export const apiGetUserResume = async (userEmail) => {
+    try {
+        const response = await axios.get('/api/resume',{
+            params: {
+                userEmail: userEmail,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting user resume:', error);
+        throw error;
+    }
+};
+

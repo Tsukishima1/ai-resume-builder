@@ -14,8 +14,13 @@ datasource db {
 }
 
 model UserResume {
-  resumeId   String @id @map("_id") @default(cuid())
-  title     String 
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  resumeId  String
+  title     String
   userEmail String
   userName  String
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  publishedAt DateTime?
 }
