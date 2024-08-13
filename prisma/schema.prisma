@@ -15,12 +15,58 @@ datasource db {
 
 model UserResume {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
-  resumeId  String
+  resumeId  String @unique
   title     String
   userEmail String
   userName  String
 
+  firstName String?
+  lastName  String?
+  jobTitle  String?
+  address   String?
+  phone     String?
+  email     String?
+
+  themeColor String?
+  summery    String?
+
+  experience Experience[]
+  education  Education[]
+  skills     Skill[]
+
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   publishedAt DateTime?
+}
+
+model Experience {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  companyName  String
+  location     String
+  startDate    String
+  endDate      String
+  workSummery  String
+  userResumeId String     @db.ObjectId
+  userResume   UserResume @relation(fields: [userResumeId], references: [id])
+}
+
+model Education {
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
+  universityName String
+  startDate      String
+  endDate        String
+  degree         String
+  major          String
+  description    String
+  userResumeId   String     @db.ObjectId
+  userResume     UserResume @relation(fields: [userResumeId], references: [id])
+}
+
+model Skill {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  rating       Int
+  userResumeId String     @db.ObjectId
+  userResume   UserResume @relation(fields: [userResumeId], references: [id])
 }

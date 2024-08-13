@@ -28,3 +28,18 @@ export const apiGetUserResume = async (userEmail) => {
     }
 };
 
+// 更新对应resumeId的简历数据
+export const apiUpdateResume = async (resumeData) => {
+    try {
+        const response = await axios.put('/api/resume', resumeData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating resume:', error);
+        throw error;
+    }
+};
+

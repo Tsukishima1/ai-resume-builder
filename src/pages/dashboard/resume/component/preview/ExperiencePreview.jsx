@@ -15,8 +15,8 @@ export const ExperiencePreview = ({resumeInfo}) => {
             color: resumeInfo?.themeColor
           }}>{exp?.title}</h2>
           <h2 className="text-xs flex justify-between text-muted-foreground">
-            {exp.companyName}, {exp?.city}, {exp?.state}
-          <span className="text-xs">{exp.startDate} - {exp?.currentlyWorking?'Present':exp?.endDate}</span>
+            {exp.companyName}, {exp?.location}
+          <span className="text-xs">{exp.startDate} - {exp?.endDate}</span>
           </h2>
           <p className="text-xs mt-2">{exp.workSummery}</p>
         </div>
