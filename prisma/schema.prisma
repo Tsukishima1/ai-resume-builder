@@ -28,7 +28,7 @@ model UserResume {
   email     String?
 
   themeColor String?
-  summery    String?
+  summary    String?
 
   experience Experience[]
   education  Education[]
@@ -46,7 +46,7 @@ model Experience {
   location     String
   startDate    String
   endDate      String
-  workSummery  String
+  workSummary  String
   userResumeId String     @db.ObjectId
   userResume   UserResume @relation(fields: [userResumeId], references: [id])
 }

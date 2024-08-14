@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import { PersonalDetailPreview } from "./preview/PersonalDetailPreview";
-import { SummeryPreview } from "./preview/SummeryPreview";
+import { SummaryPreview } from "./preview/SummaryPreview";
 import { ExperiencePreview } from "./preview/ExperiencePreview";
 import { EducationalPreview } from "./preview/EducationalPreview";
 import { SkillsPreview } from "./preview/SkillsPreview";
@@ -16,8 +16,8 @@ export const ResumePreview = () => {
     }}>
         {/* Personal Detail */}
             <PersonalDetailPreview resumeInfo={resumeInfo}/>
-        {/* Summery */}
-            <SummeryPreview resumeInfo={resumeInfo}/>
+        {/* Summary */}
+            <SummaryPreview resumeInfo={resumeInfo}/>
         {/* Professional Experience */}
             <ExperiencePreview resumeInfo={resumeInfo}/>
         {/* Educational */}

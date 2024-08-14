@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { PersonalDetail } from "./forms/PersonalDetail"
+import { Summary } from "./forms/Summary"
 import { ArrowRight, LayoutGrid, ArrowLeft } from "lucide-react"
 import { useState } from "react"
 
@@ -30,7 +31,7 @@ export const FromSection = () => {
       {/* Personal Detail */}
       {activeFormIndex === 1 ? <PersonalDetail enableNext={(v)=>setEnableNext(v)} /> : null}
       {/* Summery */}
-
+      {activeFormIndex === 2 ? <Summary enableNext={(v)=>setEnableNext(v)} /> : null}
       {/* Experience */}
 
       {/* Educational Detail */}

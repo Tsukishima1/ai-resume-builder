@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useUser } from '@clerk/clerk-react'
 import { apiCreateNewResume } from '@/api/resume';
-import { useNavigation } from 'react-router-dom';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 
 function AddResume() {
@@ -21,7 +21,7 @@ function AddResume() {
     const [resumeTitle, setResumeTitle] = useState(''); // 设置简历标题的状态
     const [loading, setLoading] = useState(false); // 设置加载状态
     const { user } = useUser(); // 使用useUser hook获取当前用户信息
-    const navigation = useNavigation();
+    const navigation = useNavigate();
 
     const onCreate = async () => {
         const uuid = uuidv4(); // 生成一个uuid
@@ -37,7 +37,7 @@ function AddResume() {
             const result = await apiCreateNewResume(resumeData);
             console.log('Created resume:', result);
             setOpenDialog(false); // 关闭对话框
-            navigation('/dashboard/resume/' + uuid + '/edit'); // 跳转到编辑页面
+            navigation(`/dashboard/resume/${uuid}/edit`); // 跳转到新创建的简历
         } catch (error) {
             console.error('Failed to create resume:', error);
         } finally {

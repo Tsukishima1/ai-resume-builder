@@ -6,7 +6,7 @@ export default{
     phone:'(123)-456-7890',
     email:'exmaple@gmail.com',
     themeColor:"#1E5F74",
-    summery:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    summary:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     experience:[
         {
             id:'2',
@@ -15,7 +15,7 @@ export default{
             location:'New York',
             startDate:'2021-09',
             endDate:'2024-04',
-            workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
+            workSummary:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
             '• Implemented responsive user interfaces with React, ensuring seamless user experiences across\n'+
             'various devices and browsers.\n'+
             '• Maintaining the React Native in-house organization application.'+
@@ -29,7 +29,7 @@ export default{
             location:'Charlotte',
             startDate:'2019-05',
             endDate:'2021-08',
-            workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.'+
+            workSummary:' Designed, developed, and maintained full-stack applications using React and Node.js.'+
             '• Implemented responsive user interfaces with React, ensuring seamless user experiences across'+
             'various devices and browsers.'+
             '• Maintaining the React Native in-house organization application.'+

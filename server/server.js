@@ -1,11 +1,20 @@
 import express from 'express';
 import { PrismaClient } from "@prisma/client";
-import { ObjectId } from 'mongodb';
+import OpenAI from 'openai'; // 引入OpenAI SDK
+
+// 加载环境变量
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const prisma = new PrismaClient();
 
 app.use(express.json());
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY, // 使用环境变量中的OPENAI_API_KEY作为API密钥
+    baseURL: 'https://www.apigptopen.xyz/v1',
+}); // 初始化OpenAI SDK
 
 export const createNewResume = async (req, res) => {
     const { resumeId, title, userEmail, userName } = req.body;
@@ -61,10 +70,35 @@ export const updateResume = async (req, res) => {
     }
 }
 
+export const generateSummary = async (req, res) => {
+    const { prompt } = req.body;
+
+    try {
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    role: 'system',
+                    content: 'You are a highly skilled software engineer with a passion for building innovative applications.',
+                },
+                {
+                    role: 'user',
+                    content: prompt,
+                },
+            ],
+        });
+        res.json(response.choices[0].message.content); // 返回生成的摘要
+    } catch (error) {
+        console.error('Error generating summary:', error);
+        res.status(500).json({ error: "An error occurred while generating the summary" });
+    }
+}
+
 // 示例：设置路由
 app.post('/api/resume', createNewResume);
 app.get('/api/resume', getUserResume);
 app.put('/api/resume', updateResume);
+app.post('/api/generate-summary', generateSummary);
 app.get('/', (req, res) => {
     res.send('Hello World');
 });

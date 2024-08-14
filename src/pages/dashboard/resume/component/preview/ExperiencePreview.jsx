@@ -18,7 +18,7 @@ export const ExperiencePreview = ({resumeInfo}) => {
             {exp.companyName}, {exp?.location}
           <span className="text-xs">{exp.startDate} - {exp?.endDate}</span>
           </h2>
-          <p className="text-xs mt-2">{exp.workSummery}</p>
+          <p className="text-xs mt-2">{exp.workSummary}</p>
         </div>
         ))  
       }
