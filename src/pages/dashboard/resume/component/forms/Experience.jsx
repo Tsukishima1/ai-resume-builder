@@ -26,7 +26,11 @@ export const Experience = ({ enableNext }) => {
     const handleChange = (index, event) => {
         enableNext(false);
         const values = [...experienceList]; // 获取所有的工作经验，然后更新指定的工作经验
-        values[index][event.target.name] = event.target.value;
+        // 和深浅拷贝有关，这里的values是一个数组，里面存放的是对象，如果直接修改values[index]的属性，那么会直接修改原来的值，所以需要先拷贝一份，然后再修改
+        values[index]={
+            ...values[index],
+            [event.target.name]: event.target.value
+        };
         setExperienceList(values);
     }
 
@@ -43,7 +47,10 @@ export const Experience = ({ enableNext }) => {
     const handleRichTextEditor = (event, name, index) => {
         enableNext(false);
         const values = [...experienceList];
-        values[index][name] = event.target.value;
+        values[index]={
+            ...values[index],
+            [name]: event.target.value
+        };
         setExperienceList(values);
     }
 
@@ -78,11 +85,11 @@ export const Experience = ({ enableNext }) => {
 
     return (
         <div className='p-5 shadow-md rounded-lg border-t-primary border-t-8 mt-8'>
-            <h2 className='font-bold text-lg'>Professional Experience</h2>
-            <p className='text-muted-foreground'>Add your previous job experience</p>
+            <h2 className='font-bold text-lg'>工作经历</h2>
+            <p className='text-muted-foreground'>填写你曾经的一些工作经历吧！</p>
             <div>
                 {experienceList.map((experience, index) => (
-                    <div key={index}>
+                    <div key={index} className={index}>
                         {experienceList.length > 1 &&
                             <>
                                 <hr className='border-t-2 mt-5' />
@@ -91,24 +98,24 @@ export const Experience = ({ enableNext }) => {
                         }
                         <div className='grid grid-cols-2 mt-5 gap-3'>
                             <div className='col-span-2'>
-                                <label className='text-sm text-muted-foreground'>Position Title</label>
-                                <Input name="title" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index].title} className="mt-1" />
+                                <label className='text-sm text-muted-foreground'>职位</label>
+                                <Input name="title" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index]?.title||''} className="mt-1" />
                             </div>
                             <div>
-                                <label className='text-sm text-muted-foreground'>Company Name</label>
-                                <Input name="companyName" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index].companyName} className="mt-1" />
+                                <label className='text-sm text-muted-foreground'>公司</label>
+                                <Input name="companyName" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index]?.companyName||''} className="mt-1" />
                             </div>
                             <div>
-                                <label className='text-sm text-muted-foreground'>Location</label>
-                                <Input name="location" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index].location} className="mt-1" />
+                                <label className='text-sm text-muted-foreground'>地点</label>
+                                <Input name="location" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index]?.location||''} className="mt-1" />
                             </div>
                             <div>
-                                <label className='text-sm text-muted-foreground'>Start Date</label>
-                                <Input type="month" name="startDate" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index].startDate} className="mt-1" />
+                                <label className='text-sm text-muted-foreground'>开始时间</label>
+                                <Input type="month" name="startDate" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index]?.startDate||''} className="mt-1" />
                             </div>
                             <div>
-                                <label className='text-sm text-muted-foreground'>End Date</label>
-                                <Input type="month" name="endDate" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index].endDate} className="mt-1" />
+                                <label className='text-sm text-muted-foreground'>结束时间</label>
+                                <Input type="month" name="endDate" onChange={(event) => handleChange(index, event)} defaultValue={resumeInfo?.experience[index]?.endDate||''} className="mt-1" />
                             </div>
                             <div className='col-span-2'>
                                 <RichTextEditor
@@ -122,13 +129,13 @@ export const Experience = ({ enableNext }) => {
             </div>
             <div className='flex justify-between mt-5'>
                 <div className='flex gap-2'>
-                    <Button onClick={AddNewExperience} variant="outline"> + Add More Experience</Button>
+                    <Button onClick={AddNewExperience} variant="outline"> + 添加更多工作经验</Button>
                     {
-                        experienceList.length > 1 && <Button onClick={RemoveExperience} variant="outline"> - Remove</Button>
+                        experienceList.length > 1 && <Button onClick={RemoveExperience} variant="outline"> - 移除最后一条</Button>
                     }
                 </div>
                 <Button disabled={loading} onClick={onSave}>
-                    {loading ? <LoaderCircle className='animate-spin w-5 h-5' /> : 'Save'}
+                    {loading ? <LoaderCircle className='animate-spin w-5 h-5' /> : '保存'}
                 </Button>
             </div>
         </div>

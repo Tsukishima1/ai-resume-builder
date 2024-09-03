@@ -53,39 +53,39 @@ export const PersonalDetail = ({enableNext}) => {
 
     return (
         <div className='p-5 shadow-md rounded-lg border-t-primary border-t-8 mt-8'>
-            <h2 className='font-bold text-lg'>Personal Detail</h2>
-            <p className='text-muted-foreground'>Get Started with the basic information</p>
+            <h2 className='font-bold text-lg'>个人资料</h2>
+            <p className='text-muted-foreground'>开始填写你的基础信息吧！</p>
 
             <form onSubmit={onSave}>
                 <div className='grid grid-cols-2 mt-5 gap-3'>
                     <div>
-                        <label className='text-sm text-muted-foreground'>First Name</label>
+                        <label className='text-sm text-muted-foreground'>姓</label>
                         <Input name='firstName' defaultValue={resumeInfo?.firstName} required onChange={handleInputChange} className='mt-1'/>
                     </div>
                     <div>
-                        <label className='text-sm text-muted-foreground'>Last Name</label>
+                        <label className='text-sm text-muted-foreground'>名</label>
                         <Input name='lastName' defaultValue={resumeInfo?.lastName} required onChange={handleInputChange} className='mt-1'/>
                     </div>
                     <div className='col-span-2'>
-                        <label className='text-sm text-muted-foreground'>Job Title</label>
+                        <label className='text-sm text-muted-foreground'>求职名称</label>
                         <Input name='jobTitle' defaultValue={resumeInfo?.jobTitle} required onChange={handleInputChange} className='mt-1'/>
                     </div>
                     <div className='col-span-2'>
-                        <label className='text-sm text-muted-foreground'>Address</label>
+                        <label className='text-sm text-muted-foreground'>常住地址</label>
                         <Input name='address' defaultValue={resumeInfo?.address} required onChange={handleInputChange} className='mt-1'/>
                     </div>
                     <div className=''>
-                        <label className='text-sm text-muted-foreground'>Phone</label>
+                        <label className='text-sm text-muted-foreground'>手机号码</label>
                         <Input name='phone' defaultValue={resumeInfo?.phone} required onChange={handleInputChange} className='mt-1'/>
                     </div>
                     <div className=''>
-                        <label className='text-sm text-muted-foreground'>Email</label>
+                        <label className='text-sm text-muted-foreground'>邮箱地址</label>
                         <Input name='email' defaultValue={resumeInfo?.email} required onChange={handleInputChange} className='mt-1'/>
                     </div>
                 </div>
                 <div className='mt-3 flex justify-end'>
                     <Button disabled={loading}>
-                        {loading ? <LoaderCircle className='animate-spin w-5 h-5' /> : 'Save'}
+                        {loading ? <LoaderCircle className='animate-spin w-5 h-5' /> : '保存'}
                     </Button>
                 </div>
             </form>

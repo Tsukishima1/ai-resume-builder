@@ -76,27 +76,27 @@ export const Summary = ({ enableNext }) => {
     return (
         <div>
             <div className='p-5 shadow-md rounded-lg border-t-primary border-t-8 mt-8'>
-                <h2 className='font-bold text-lg'>Summary</h2>
-                <p className='text-muted-foreground'>Add summary for your job title</p>
+                <h2 className='font-bold text-lg'>简历摘要</h2>
+                <p className='text-muted-foreground'>现在完成一份你的简历摘要！</p>
 
                 <form onSubmit={onSave}>
                     <div className='mt-6'>
                         <div className='justify-between flex items-end'>
-                            <label>Add Summary</label>
+                            <label>填写摘要内容</label>
                             <Button className="border-neutral-400 text-primary border-2 text-neutral-500 focus-visible:text-sm" size="sm" variant="outline"
                                 type="button"
                                 onClick={handleGernerateSummary}
                                 disabled={loading}
                             >
                                 <Brain className="w-4 mr-1" />
-                                Generate from AI
+                                调用AI生成
                             </Button>
                         </div>
                     </div>
                     <Textarea className="mt-5" required onChange={(e) => setSummary(e.target.value)} value={resumeInfo?.summary} />
                     <div className='mt-2 flex justify-end'>
                         <Button disabled={loading}>
-                            {loading ? <LoaderCircle className='animate-spin w-5 h-5' /> : 'Save'}
+                            {loading ? <LoaderCircle className='animate-spin w-5 h-5' /> : '保存'}
                         </Button>
                     </div>
                 </form>

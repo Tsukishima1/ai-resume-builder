@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { PersonalDetail } from "./forms/PersonalDetail"
 import { Summary } from "./forms/Summary"
 import { Experience } from "./forms/Experience"
+import { Education } from "./forms/Education"
 import { ArrowRight, LayoutGrid, ArrowLeft } from "lucide-react"
 import { useState } from "react"
 
@@ -13,7 +14,7 @@ export const FromSection = () => {
   return (
     <div className="">
       <div className="flex justify-between items-center">
-        <Button variant="outline" size="sm" className="flex gap-2"><LayoutGrid className="w-5"/> Theme</Button>
+        <Button variant="outline" size="sm" className="flex gap-2"><LayoutGrid className="w-5"/> 主题色</Button>
         <div className="flex gap-2">
           {activeFormIndex > 1 && 
           <Button className="flex gap-2" size="sm"
@@ -25,7 +26,7 @@ export const FromSection = () => {
             onClick={() => {setActiveFormIndex(activeFormIndex + 1); setEnableNext(false);}}
             disabled={!enableNext}
           >
-            Next <ArrowRight className="w-5"/>
+            下一步 <ArrowRight className="w-5"/>
           </Button>
         </div>
       </div>
@@ -36,7 +37,7 @@ export const FromSection = () => {
       {/* Experience */}
       {activeFormIndex === 3 ? <Experience enableNext={(v)=>setEnableNext(v)} /> : null}
       {/* Educational Detail */}
-
+      {activeFormIndex === 4 ? <Education enableNext={(v)=>setEnableNext(v)} /> : null}
       {/* Skills */}
     </div>
   )

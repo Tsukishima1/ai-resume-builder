@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { ResumeInfoContext } from '@/context/ResumeInfoContext'
 import { Brain } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -10,9 +10,27 @@ const PROMPT = '职位名称：{positionTitle}，给出三到五句工作内容�
 
 export const RichTextEditor = ({ onRichTextEditorChange, index }) => { // 为什么这里要加{}而不是直接写参数名？ 因为这里是解构赋值，如果直接写参数名，那么在调用这个组件的时候，就必须要传入一个对象，而不是直接传入一个值
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
-    const [value, setValue] = useState()
+    const [loading, setLoading] = useState(false)
+    const [value, setValue] = useState() // value指的是富文本编辑器的内容
+
+    useEffect(()=>{
+        // 更新resumeInfo
+        setResumeInfo({
+            ...resumeInfo,
+            experience: resumeInfo.experience.map((item, i) => {
+                if(i === index) {
+                    return {
+                        ...item,
+                        workSummary: value
+                    }
+                }
+                return item
+            })
+        })
+    },[value])
 
     const handleGernerateSummary = async () => {
+        setLoading(true);
         if(!resumeInfo.experience[index].title) {
             toast.error('Please enter the position title first')
             return
@@ -26,12 +44,15 @@ export const RichTextEditor = ({ onRichTextEditorChange, index }) => { // 为什
         catch (error) {
             console.error('Failed to generate summary:', error)
         }
+        finally {
+            setLoading(false)
+        }
     }
 
     return (
         <div>
             <div className='flex justify-between my-2 items-center'>
-                <label className='text-sm text-muted-foreground'>Summary</label>
+                <label className='text-sm text-muted-foreground'>工作内容简述</label>
                 <Button className="border-neutral-400 text-primary border-2 text-neutral-500 focus-visible:text-sm" 
                     size="sm" variant="outline"
                     type="button"
@@ -39,7 +60,7 @@ export const RichTextEditor = ({ onRichTextEditorChange, index }) => { // 为什
                     onClick={handleGernerateSummary}
                 >
                     <Brain className="w-4 mr-1" />
-                    Generate from AI
+                    调用AI生成
                 </Button>
             </div>
             <EditorProvider>

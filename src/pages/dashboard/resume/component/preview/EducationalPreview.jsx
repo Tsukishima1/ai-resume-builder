@@ -6,7 +6,7 @@ export const EducationalPreview = ({resumeInfo}) => {
         <h2 className="text-center font-bold text-sm" style={{
             color: resumeInfo?.themeColor
         }}
-        >Educational Qualifications</h2>
+        >教育背景</h2>
         <hr className="my-3" style={{
             borderColor: resumeInfo?.themeColor
         }}/>
