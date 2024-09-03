@@ -8,6 +8,8 @@ import { apiGenerateSummary } from '@/api/generate-summary'
 import { useParams } from 'react-router-dom'
 import { toast } from "sonner"
 
+const PROMPT = '生成三到五句简历摘要，一段话即可，职业是：{jobTitle}'
+
 export const Summary = ({ enableNext }) => {
     const params = useParams()
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
@@ -52,9 +54,14 @@ export const Summary = ({ enableNext }) => {
     }
 
     const handleGernerateSummary = async () => {
+        if (!resumeInfo?.jobTitle) {
+            toast.error('Please enter the job title first')
+            return
+        }
+        const prompt = PROMPT.replace('{jobTitle}', resumeInfo?.jobTitle)
         setLoading(true)
         try {
-            const response = await apiGenerateSummary(resumeInfo.jobTitle)
+            const response = await apiGenerateSummary(prompt)
             console.log('response:', response)
             setSummary(response)
         }

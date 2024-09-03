@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-export const apiGenerateSummary = async (jobtitle) => {
+export const apiGenerateSummary = async (prompt) => {
     try {
         const response = await axios.post('/api/generate-summary', 
-            {
-                prompt: '生成一份三到四句话的简历摘要，职业是' + jobtitle,
-            }, 
+            { prompt },
             {
                 headers: {
                     'Content-Type': 'application/json',

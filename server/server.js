@@ -54,21 +54,45 @@ export const getUserResume = async (req, res) => {
 };
 
 export const updateResume = async (req, res) => {
-    // 接收resumeId和表单数据
-    const { resumeId, ...resumeData } = req.body;
+    const { resumeId, experience, ...resumeData } = req.body;
+
     try {
-        const userResume = await prisma.userResume.update({ // 更新对应resumeId的简历数据
+        if (!resumeId) {
+            return res.status(400).json({ error: "Missing resumeId" });
+        }
+
+        const updateData = {
+            ...resumeData,
+        };
+
+        if (experience) {
+            updateData.experience = {
+                deleteMany: {}, // 先删除现有的 experience 记录
+                create: experience.map(exp => ({
+                    ...exp
+                })),
+            };
+        }
+
+        const userResume = await prisma.userResume.update({
             where: {
                 resumeId,
             },
-            data: resumeData,
+            data: updateData,
+            include: {
+                experience: true, // 包含关联的 experience
+            },
         });
+
         res.json(userResume); // 返回更新后的简历数据
     } catch (error) {
         console.error('Error updating resume:', error);
         res.status(500).json({ error: "An error occurred while updating the resume" });
     }
-}
+};
+
+
+
 
 export const generateSummary = async (req, res) => {
     const { prompt } = req.body;

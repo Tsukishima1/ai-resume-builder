@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { PersonalDetail } from "./forms/PersonalDetail"
 import { Summary } from "./forms/Summary"
+import { Experience } from "./forms/Experience"
 import { ArrowRight, LayoutGrid, ArrowLeft } from "lucide-react"
 import { useState } from "react"
 
@@ -21,7 +22,7 @@ export const FromSection = () => {
             <ArrowLeft className="w-5"/>
           </Button>}
           <Button className="flex gap-2" size="sm"
-            onClick={() => setActiveFormIndex(activeFormIndex + 1)}
+            onClick={() => {setActiveFormIndex(activeFormIndex + 1); setEnableNext(false);}}
             disabled={!enableNext}
           >
             Next <ArrowRight className="w-5"/>
@@ -33,7 +34,7 @@ export const FromSection = () => {
       {/* Summery */}
       {activeFormIndex === 2 ? <Summary enableNext={(v)=>setEnableNext(v)} /> : null}
       {/* Experience */}
-
+      {activeFormIndex === 3 ? <Experience enableNext={(v)=>setEnableNext(v)} /> : null}
       {/* Educational Detail */}
 
       {/* Skills */}
