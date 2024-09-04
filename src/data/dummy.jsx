@@ -39,11 +39,10 @@ export default{
         {
             id:'2',
             universityName:'Western Illinois University',
-            startDate:'2014-09',
-            endDate:'2018-06',
+            startDate:'2014',
+            endDate:'2018',
             degree:'Master',
             major:'Computer Science',
-            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
         },
     ],
     skills:[

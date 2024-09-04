@@ -7,7 +7,7 @@ import { ArrowRight, LayoutGrid, ArrowLeft } from "lucide-react"
 import { useState } from "react"
 
 export const FromSection = () => {
-  const [activeFormIndex, setActiveFormIndex] = useState(1); // 当前表单的索引，用于控制显示哪个表单
+  const [activeFormIndex, setActiveFormIndex] = useState(4); // 当前表单的索引，用于控制显示哪个表单
   const [enableNext, setEnableNext] = useState(false); // 是否启用下一个按钮
   const [enablePrev, setEnablePrev] = useState(false); // 是否启用上一个按钮
 

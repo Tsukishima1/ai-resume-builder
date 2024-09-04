@@ -54,7 +54,7 @@ export const getUserResume = async (req, res) => {
 };
 
 export const updateResume = async (req, res) => {
-    const { resumeId, experience, ...resumeData } = req.body;
+    const { resumeId, experience, education, ...resumeData } = req.body;
 
     try {
         if (!resumeId) {
@@ -74,13 +74,23 @@ export const updateResume = async (req, res) => {
             };
         }
 
+        if (education) {
+            updateData.education = {
+                deleteMany: {}, // 先删除现有的 education 记录
+                create: education.map(edu => ({
+                    ...edu
+                })),
+            };
+        }
+
         const userResume = await prisma.userResume.update({
             where: {
                 resumeId,
             },
             data: updateData,
             include: {
-                experience: true, // 包含关联的 experience
+                experience: true,
+                education: true,
             },
         });
 

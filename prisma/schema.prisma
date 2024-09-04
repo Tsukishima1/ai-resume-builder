@@ -58,7 +58,6 @@ model Education {
   endDate        String
   degree         String
   major          String
-  description    String
   userResumeId   String
   userResume     UserResume @relation(fields: [userResumeId], references: [resumeId])
 }

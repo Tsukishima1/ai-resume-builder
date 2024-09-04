@@ -92,7 +92,7 @@ export const Experience = ({ enableNext }) => {
                     <div key={index} className={index}>
                         {experienceList.length > 1 &&
                             <>
-                                <hr className='border-t-2 mt-5' />
+                                {index !== 0 && <hr className='border-t-2 mt-5' />}
                                 <h3 className='text-sm font-bold mt-5'>Experience {index + 1}</h3>
                             </>
                         }
