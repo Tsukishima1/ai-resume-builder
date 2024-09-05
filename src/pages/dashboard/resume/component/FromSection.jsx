@@ -3,11 +3,12 @@ import { PersonalDetail } from "./forms/PersonalDetail"
 import { Summary } from "./forms/Summary"
 import { Experience } from "./forms/Experience"
 import { Education } from "./forms/Education"
+import { Skill } from "./forms/Skill"
 import { ArrowRight, LayoutGrid, ArrowLeft } from "lucide-react"
 import { useState } from "react"
 
 export const FromSection = () => {
-  const [activeFormIndex, setActiveFormIndex] = useState(4); // 当前表单的索引，用于控制显示哪个表单
+  const [activeFormIndex, setActiveFormIndex] = useState(5); // 当前表单的索引，用于控制显示哪个表单
   const [enableNext, setEnableNext] = useState(false); // 是否启用下一个按钮
   const [enablePrev, setEnablePrev] = useState(false); // 是否启用上一个按钮
 
@@ -39,6 +40,7 @@ export const FromSection = () => {
       {/* Educational Detail */}
       {activeFormIndex === 4 ? <Education enableNext={(v)=>setEnableNext(v)} /> : null}
       {/* Skills */}
+      {activeFormIndex === 5 ? <Skill /> : null}
     </div>
   )
 }

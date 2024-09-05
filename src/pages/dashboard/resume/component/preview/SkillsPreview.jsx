@@ -19,7 +19,7 @@ export const SkillsPreview = ({resumeInfo}) => {
                     }}>{skill?.name}</h2>
                     <div className='h-2 bg-gray-200 w-[120px] rounded-sm'>
                         <div className='h-2 rounded-sm' style={{
-                            width: `${skill?.rating}%`,
+                            width: skill?.rating*20+'%',
                             backgroundColor: resumeInfo?.themeColor
                         }}></div>
                     </div>
