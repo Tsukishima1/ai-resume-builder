@@ -17,12 +17,19 @@ const fromField = {
     workSummary: '',
 }
 
-export const Experience = ({ enableNext }) => {
+export const Experience = ({ enableNext, toNext }) => {
     const params = useParams()
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
     const [loading, setLoading] = useState(false);
-    const [experienceList, setExperienceList] = useState([resumeInfo?.experience[0] || fromField]);
-
+    
+    // 如果resumeInfo.experience.length为0，那么就返回一个初始值，否则返回resumeInfo.experience
+    const [experienceList, setExperienceList] = useState(resumeInfo.experience.length ? resumeInfo.experience : [fromField]);
+    // 去掉experience里的id属性和userResumeId属性
+    experienceList.forEach(item => {
+        delete item.id;
+        delete item.userResumeId;
+    })
+    
     const handleChange = (index, event) => {
         enableNext(false);
         const values = [...experienceList]; // 获取所有的工作经验，然后更新指定的工作经验
@@ -58,15 +65,18 @@ export const Experience = ({ enableNext }) => {
         e.preventDefault();
         setLoading(true);
 
+        console.log(experienceList);
+
         const resumeData = {
             resumeId: params.resumeId,
             experience: experienceList
         }
         try {
             const result = await apiUpdateResume(resumeData);
-            console.log('Updated Resume:', result);
+            console.log(resumeInfo);
             enableNext(true)
-            toast("个人信息已保存~ 🎉")
+            toast("该部分更新成功~ 🎉")
+            toNext();
         }
         catch (error) {
             console.error('Failed to update resume:', error);

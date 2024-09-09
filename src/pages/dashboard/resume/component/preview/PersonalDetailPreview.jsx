@@ -2,7 +2,7 @@ export const PersonalDetailPreview = ({resumeInfo}) => {
   return (
     <div>
         <h2 className="font-bold text-2xl text-center">
-            {resumeInfo?.firstName} {resumeInfo?.lastName}
+            {resumeInfo?.fullName}
         </h2>
         <h2 className="text-center text-sm font-bold text-muted-foreground mb-2" style={{
             color: resumeInfo?.themeColor

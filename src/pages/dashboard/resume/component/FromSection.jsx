@@ -8,9 +8,12 @@ import { ArrowRight, LayoutGrid, ArrowLeft } from "lucide-react"
 import { useState } from "react"
 
 export const FromSection = () => {
-  const [activeFormIndex, setActiveFormIndex] = useState(5); // 当前表单的索引，用于控制显示哪个表单
-  const [enableNext, setEnableNext] = useState(false); // 是否启用下一个按钮
-  const [enablePrev, setEnablePrev] = useState(false); // 是否启用上一个按钮
+  const [activeFormIndex, setActiveFormIndex] = useState(1); // 当前表单的索引，用于控制显示哪个表单
+  const [enableNext, setEnableNext] = useState(true); // 是否启用下一个按钮
+
+  const handleNext = () => {
+    setActiveFormIndex(prevIndex=>prevIndex+1);
+  }
 
   return (
     <div className="">
@@ -24,7 +27,7 @@ export const FromSection = () => {
             <ArrowLeft className="w-5"/>
           </Button>}
           <Button className="flex gap-2" size="sm"
-            onClick={() => {setActiveFormIndex(activeFormIndex + 1); setEnableNext(false);}}
+            onClick={() => {setActiveFormIndex(activeFormIndex + 1);}}
             disabled={!enableNext}
           >
             下一步 <ArrowRight className="w-5"/>
@@ -32,13 +35,13 @@ export const FromSection = () => {
         </div>
       </div>
       {/* Personal Detail */}
-      {activeFormIndex === 1 ? <PersonalDetail enableNext={(v)=>setEnableNext(v)} /> : null}
+      {activeFormIndex === 1 ? <PersonalDetail enableNext={(v)=>setEnableNext(v)} toNext={handleNext}/> : null}
       {/* Summery */}
-      {activeFormIndex === 2 ? <Summary enableNext={(v)=>setEnableNext(v)} /> : null}
+      {activeFormIndex === 2 ? <Summary enableNext={(v)=>setEnableNext(v)} toNext={handleNext}/> : null}
       {/* Experience */}
-      {activeFormIndex === 3 ? <Experience enableNext={(v)=>setEnableNext(v)} /> : null}
+      {activeFormIndex === 3 ? <Experience enableNext={(v)=>setEnableNext(v)} toNext={handleNext}/> : null}
       {/* Educational Detail */}
-      {activeFormIndex === 4 ? <Education enableNext={(v)=>setEnableNext(v)} /> : null}
+      {activeFormIndex === 4 ? <Education enableNext={(v)=>setEnableNext(v)} toNext={handleNext}/> : null}
       {/* Skills */}
       {activeFormIndex === 5 ? <Skill /> : null}
     </div>

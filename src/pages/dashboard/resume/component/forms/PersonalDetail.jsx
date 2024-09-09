@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import { LoaderCircle } from 'lucide-react'
 import { toast } from "sonner"
 
-export const PersonalDetail = ({enableNext}) => {
+export const PersonalDetail = ({enableNext, toNext}) => {
     const params = useParams();
 
     const [formData, setFormData] = useState();
@@ -37,11 +37,14 @@ export const PersonalDetail = ({enableNext}) => {
             ...formData
         }
 
+        console.log(formData);
+
         try {
             const result = await apiUpdateResume(resumeData)
             console.log('Updated resume:', result)
             enableNext(true)
             toast("个人信息已保存~ 🎉")
+            toNext();
         }
         catch (error) {
             console.error('Failed to update resume:', error)
@@ -59,12 +62,8 @@ export const PersonalDetail = ({enableNext}) => {
             <form onSubmit={onSave}>
                 <div className='grid grid-cols-2 mt-5 gap-3'>
                     <div>
-                        <label className='text-sm text-muted-foreground'>姓</label>
-                        <Input name='firstName' defaultValue={resumeInfo?.firstName} required onChange={handleInputChange} className='mt-1'/>
-                    </div>
-                    <div>
-                        <label className='text-sm text-muted-foreground'>名</label>
-                        <Input name='lastName' defaultValue={resumeInfo?.lastName} required onChange={handleInputChange} className='mt-1'/>
+                        <label className='text-sm text-muted-foreground'>姓名</label>
+                        <Input name='fullName' defaultValue={resumeInfo?.fullName} required onChange={handleInputChange} className='mt-1'/>
                     </div>
                     <div className='col-span-2'>
                         <label className='text-sm text-muted-foreground'>求职名称</label>

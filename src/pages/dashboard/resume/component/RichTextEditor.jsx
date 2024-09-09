@@ -11,27 +11,26 @@ const PROMPT = '职位名称：{positionTitle}，给出三到五句工作内容�
 export const RichTextEditor = ({ onRichTextEditorChange, index }) => { // 为什么这里要加{}而不是直接写参数名？ 因为这里是解构赋值，如果直接写参数名，那么在调用这个组件的时候，就必须要传入一个对象，而不是直接传入一个值
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
     const [loading, setLoading] = useState(false)
-    const [value, setValue] = useState() // value指的是富文本编辑器的内容
+    const [value, setValue] = useState(resumeInfo.experience[index]?.workSummary||'') // value指的是富文本编辑器的内容
 
-    useEffect(()=>{
-        // 更新resumeInfo
-        setResumeInfo({
-            ...resumeInfo,
-            experience: resumeInfo.experience.map((item, i) => {
-                if(i === index) {
+    useEffect(() => {
+        setResumeInfo(prevResumeInfo => ({
+            ...prevResumeInfo,
+            experience: prevResumeInfo.experience.map((item, i) => {
+                if (i === index) {
                     return {
                         ...item,
                         workSummary: value
-                    }
+                    };
                 }
-                return item
+                return item;
             })
-        })
-    },[value])
+        }));
+    }, [value]);
 
     const handleGernerateSummary = async () => {
         setLoading(true);
-        if(!resumeInfo.experience[index].title) {
+        if (!resumeInfo.experience[index].title) {
             toast.error('Please enter the position title first')
             return
         }
@@ -49,11 +48,13 @@ export const RichTextEditor = ({ onRichTextEditorChange, index }) => { // 为什
         }
     }
 
+    // console.log(index, resumeInfo.experience[index].workSummary)
+
     return (
         <div>
             <div className='flex justify-between my-2 items-center'>
                 <label className='text-sm text-muted-foreground'>工作内容简述</label>
-                <Button className="border-neutral-400 text-primary border-2 text-neutral-500 focus-visible:text-sm" 
+                <Button className="border-neutral-400 text-primary border-2 text-neutral-500 focus-visible:text-sm"
                     size="sm" variant="outline"
                     type="button"
                     disabled={loading}
@@ -64,11 +65,12 @@ export const RichTextEditor = ({ onRichTextEditorChange, index }) => { // 为什
                 </Button>
             </div>
             <EditorProvider>
-                <Editor value={value} 
-                onChange={(e) => {
-                    setValue(e.target.value)
-                    onRichTextEditorChange(e)
-                }}>
+                <Editor value={value}
+                    onChange={(e) => {
+                        setValue(e.target.value)
+                        onRichTextEditorChange(e)
+                    } }
+                    >
                     <Toolbar>
                         <BtnBold />
                         <BtnItalic />

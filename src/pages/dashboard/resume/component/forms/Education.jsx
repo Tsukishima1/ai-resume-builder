@@ -16,11 +16,15 @@ const formField = {
   endDate: '',
 }
 
-export const Education = ({ enableNext }) => {
+export const Education = ({ enableNext, toNext }) => {
   const params = useParams()
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
   const [loading, setLoading] = useState(false)
-  const [educationList, setEducationList] = useState([resumeInfo?.education[0] || formField])
+  const [educationList, setEducationList] = useState(resumeInfo.education.length ? resumeInfo.education : [formField])
+  educationList.forEach(item => {
+    delete item.id;
+    delete item.userResumeId;
+  })
 
   const AddNewEducation = () => {
     setEducationList([...educationList, formField])
@@ -60,7 +64,8 @@ export const Education = ({ enableNext }) => {
       const result = await apiUpdateResume(resumeData);
       console.log('Updated Resume:', result);
       enableNext(true)
-      toast("个人信息已保存~ 🎉")
+      toast("该部分更新成功~ 🎉")
+      toNext();
     }
     catch (error) {
       console.error('Failed to update resume:', error);

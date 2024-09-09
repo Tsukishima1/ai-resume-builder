@@ -10,7 +10,7 @@ import { toast } from "sonner"
 
 const PROMPT = '生成三到五句简历摘要，一段话即可，职业是：{jobTitle}'
 
-export const Summary = ({ enableNext }) => {
+export const Summary = ({ enableNext, toNext }) => {
     const params = useParams()
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
     const [summary, setSummary] = useState('')
@@ -44,6 +44,7 @@ export const Summary = ({ enableNext }) => {
             console.log('Updated resume:', result)
             enableNext(true)
             toast("简历已更新~ 🎉")
+            toNext();
         }
         catch (error) {
             console.error('Failed to update resume:', error)

@@ -16,7 +16,7 @@ export const apiCreateNewResume = async (resumeData) => {
 
 export const apiGetUserResume = async (userEmail) => {
     try {
-        const response = await axios.get('/api/resume',{
+        const response = await axios.get('/api/resumelist',{
             params: {
                 userEmail: userEmail,
             },
@@ -43,3 +43,16 @@ export const apiUpdateResume = async (resumeData) => {
     }
 };
 
+export const apiGetResumeInfo = async (resumeId) => {
+    try {
+        const response = await axios.get('/api/resume', {
+            params: {
+                resumeId: resumeId,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting resume:', error);
+        throw error;
+    }
+}

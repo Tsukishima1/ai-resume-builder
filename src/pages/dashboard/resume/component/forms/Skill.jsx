@@ -18,7 +18,11 @@ const Formfield = {
 export const Skill = () => {
     const params = useParams()
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
-    const [skillList, setSkillList] = useState([Formfield])
+    const [skillList, setSkillList] = useState(resumeInfo?.skills.length > 1 ? resumeInfo?.skills : [Formfield])
+    skillList.forEach(item => {
+        delete item.id;
+        delete item.userResumeId;
+    })
     const [loading, setLoading] = useState(false)
 
     const handleChange = (index, key, e) => {
@@ -41,6 +45,7 @@ export const Skill = () => {
     }
 
     const onSave = async () => {
+        console.log('Skill List:', skillList)
         setLoading(true)
 
         const resumeData = {
@@ -51,7 +56,7 @@ export const Skill = () => {
         try {
             const result = await apiUpdateResume(resumeData);
             console.log('Updated Resume:', result);
-            toast("个人信息已保存~ 🎉")
+            toast("该部分更新成功~ 🎉")
         }
         catch (error) {
             console.error('Failed to update resume:', error);
@@ -74,11 +79,15 @@ export const Skill = () => {
                     <div className='flex justify-between border rounded-lg p-2 items-center' key={index}>
                         <div>
                             <label className="text-xs text-muted-foreground">技能名称</label>
-                            <Input onChange={(e) => { handleChange(index, 'name', e.target.value) }} className="mt-1" />
+                            <Input
+                                onChange={(e) => { handleChange(index, 'name', e.target.value) }}
+                                className="mt-1"
+                                defaultValue={resumeInfo?.skills[index]?.name} />
                         </div>
                         <Rating
                             value={skill.rating} onChange={(v) => { handleChange(index, 'rating', v) }}
                             style={{ maxWidth: 130 }}
+                            defaultValue={resumeInfo?.skills[index]?.rating}
                         />
                     </div>
                 ))}

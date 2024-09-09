@@ -20,14 +20,13 @@ model UserResume {
   userEmail String
   userName  String
 
-  firstName String?
-  lastName  String?
+  fullName  String?
   jobTitle  String?
   address   String?
   phone     String?
   email     String?
 
-  themeColor String?
+  themeColor String? @default("#000000")
   summary    String?
 
   experience Experience[] @relation("ResumeExperiences")

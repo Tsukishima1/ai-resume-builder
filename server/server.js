@@ -67,28 +67,22 @@ export const updateResume = async (req, res) => {
 
         if (experience) {
             updateData.experience = {
-                deleteMany: {}, // 先删除现有的 experience 记录
-                create: experience.map(exp => ({
-                    ...exp
-                })),
+                deleteMany: {},
+                create: experience,
             };
         }
 
         if (education) {
             updateData.education = {
-                deleteMany: {}, // 先删除现有的 education 记录
-                create: education.map(edu => ({
-                    ...edu
-                })),
+                deleteMany: {},
+                create: education,
             };
         }
 
         if (skill) {
             updateData.skills = {
-                deleteMany: {}, // 先删除现有的 skill 记录
-                create: skill.map(s => ({
-                    ...s
-                })),
+                deleteMany: {},
+                create: skill,
             };
         }
 
@@ -97,11 +91,6 @@ export const updateResume = async (req, res) => {
                 resumeId,
             },
             data: updateData,
-            include: {
-                experience: true,
-                education: true,
-                skills: true,
-            },
         });
 
         res.json(userResume); // 返回更新后的简历数据
@@ -111,8 +100,29 @@ export const updateResume = async (req, res) => {
     }
 };
 
+export const getResumeInfo = async (req, res) => {
+    const { resumeId } = req.query;
+    if (!resumeId) {
+        return res.status(400).json({ error: 'resumeId query parameter is required' });
+    }
 
-
+    try {
+        const userResume = await prisma.userResume.findUnique({
+            where: {
+                resumeId,
+            },
+            include: {
+                experience: true,
+                education: true,
+                skills: true,
+            },
+        });
+        res.json(userResume); // 返回简历数据
+    } catch (error) {
+        console.error('Error getting resume:', error);
+        res.status(500).json({ error: "An error occurred while getting the resume" });
+    }
+}
 
 export const generateSummary = async (req, res) => {
     const { prompt } = req.body;
@@ -140,9 +150,10 @@ export const generateSummary = async (req, res) => {
 
 // 示例：设置路由
 app.post('/api/resume', createNewResume);
-app.get('/api/resume', getUserResume);
+app.get('/api/resumelist', getUserResume);
 app.put('/api/resume', updateResume);
 app.post('/api/generate-summary', generateSummary);
+app.get('/api/resume', getResumeInfo);
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
