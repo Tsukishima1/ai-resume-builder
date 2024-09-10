@@ -7,6 +7,7 @@ import SignInPage from './pages/auth/sign-in/index.jsx'
 import HomePage from './pages/home/index.jsx'
 import EditResume from './pages/dashboard/resume/[resumeId]/edit/index.jsx'
 import DashBoardPage from './pages/dashboard/index.jsx'
+import ViewResume from './pages/my-resume/[resumeId]/view/index.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: '/auth/sign-in',
     element: <SignInPage />
+  },
+  {
+    path: '/my-resume/:resumeId/view',
+    element: <ViewResume />
   }
 ])
 

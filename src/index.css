@@ -85,3 +85,28 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  #no-print {
+    display:none;
+  }
+  #print-area {
+    display:block;
+    margin: 0;
+    padding: 0;
+  }
+  #print-area>div {
+    border-radius: 0px;
+    box-shadow: none;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0mm;
+}

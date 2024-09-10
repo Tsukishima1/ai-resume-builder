@@ -15,7 +15,6 @@ function EditResume() {
 
   const GetResumeInfo=()=>{
     apiGetResumeInfo(params.resumeId).then((data)=>{
-      console.log(data);
       setResumeInfo(data);
     }).catch((error)=>{
       console.error('Error getting resume:', error);

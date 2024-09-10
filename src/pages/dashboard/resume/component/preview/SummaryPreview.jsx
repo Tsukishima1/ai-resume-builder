@@ -1,6 +1,6 @@
 export const SummaryPreview = ({resumeInfo}) => {
   return (
-    <p className="text-xs">
+    <p className="text-sm">
       {resumeInfo?.summary}
     </p>
   )

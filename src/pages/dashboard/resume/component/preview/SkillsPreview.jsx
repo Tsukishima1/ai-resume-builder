@@ -11,10 +11,10 @@ export const SkillsPreview = ({resumeInfo}) => {
             borderColor: resumeInfo?.themeColor
         }}/>
     
-        <div className='grid grid-cols-2 gap-3 my-4'>
+        <div className='grid grid-cols-2 gap-3 my-4 mb-10'>
             {resumeInfo?.skills.map((skill, index) => (
                 <div key={index} className="mb-2 flex items-center justify-between">
-                    <h2 className="text-sm font-bold" style={{
+                    <h2 className="text-md font-bold" style={{
                         color: resumeInfo?.themeColor
                     }}>{skill?.name}</h2>
                     {

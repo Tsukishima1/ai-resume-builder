@@ -14,10 +14,10 @@ export const EducationalPreview = ({ resumeInfo }) => {
             {resumeInfo?.education.map((edu, index) => (
                 <div key={index} className="mb-2 flex justify-between">
                     <div>
-                        <h2 className="text-sm font-bold" style={{
+                        <h2 className="text-md font-bold" style={{
                             color: resumeInfo?.themeColor
                         }}>{edu?.universityName}</h2>
-                        <h2 className="text-xs flex justify-between text-muted-foreground">
+                        <h2 className="text-sm flex justify-between text-muted-foreground">
                             {edu.degree} {edu?.major}
 
                         </h2>
