@@ -4,10 +4,10 @@ import { Summary } from "./forms/Summary"
 import { Experience } from "./forms/Experience"
 import { Education } from "./forms/Education"
 import { Skill } from "./forms/Skill"
-import { ArrowRight, LayoutGrid, ArrowLeft, Home } from "lucide-react"
+import { ArrowRight, ArrowLeft, Home } from "lucide-react"
 import { useState } from "react"
 import { Link, Navigate, useParams } from "react-router-dom"
-import ViewResume from "@/pages/my-resume/[resumeId]/view"
+import ThemeColor from "./ThemeColor"
 
 export const FromSection = () => {
   const params = useParams();
@@ -25,7 +25,7 @@ export const FromSection = () => {
           <Link to="/dashboard">
             <Button><Home size={18}/></Button>
           </Link>
-          <Button variant="outline" className="flex gap-2"><LayoutGrid size={18}/> 主题色</Button>
+          <ThemeColor />
         </div>
         <div className="flex gap-2">
           {activeFormIndex > 1 && 

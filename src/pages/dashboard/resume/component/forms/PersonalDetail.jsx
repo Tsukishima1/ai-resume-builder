@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input'
 import { ResumeInfoContext } from '@/context/ResumeInfoContext'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { apiUpdateResume } from '@/api/resume'
 import { Button } from '@/components/ui/button'
 import { useParams } from 'react-router-dom'

@@ -12,6 +12,7 @@ const prisma = new PrismaClient();
 app.use(express.json());
 
 const openai = new OpenAI({
+    // eslint-disable-next-line no-undef
     apiKey: process.env.OPENAI_API_KEY, // 使用环境变量中的OPENAI_API_KEY作为API密钥
     baseURL: 'https://www.apigptopen.xyz/v1',
 }); // 初始化OpenAI SDK
